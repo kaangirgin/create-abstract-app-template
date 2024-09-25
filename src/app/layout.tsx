@@ -2,12 +2,24 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+// Default Fonts from Next.js
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+
+// Abstract Fonts
 const avenueMono = localFont({
   src: "./fonts/Avenue Mono.ttf",
   variable: "--font-avenue-mono",
   weight: "100, 900",
 });
-
 const roobert = localFont({
   src: [
     { path: "./fonts/Roobert-Light.ttf", weight: "300", style: "normal" },
@@ -33,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${avenueMono.variable} ${roobert.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${avenueMono.variable} ${roobert.variable} antialiased`}
       >
         {children}
       </body>
