@@ -29,7 +29,7 @@ export default function Home() {
 
           <div className="flex justify-center">
             <a
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 font-[family-name:var(--font-roobert)]"
               href="TODO"
               target="_blank"
               rel="noopener noreferrer"
@@ -48,7 +48,7 @@ export default function Home() {
       </main>
 
       {/* Updated cards section */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl mx-auto mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl mx-auto mt-8 font-[family-name:var(--font-roobert)]">
         <a
           href="https://docs.abs.xyz"
           target="_blank"
@@ -65,7 +65,7 @@ export default function Home() {
           <h3 className="text-lg font-semibold mb-2 opacity-90">
             Documentation
           </h3>
-          <p className="text-sm opacity-70">Explore Abstract docs</p>
+          <p className="text-sm opacity-70">Explore our developer docs.</p>
         </a>
 
         <a
@@ -84,7 +84,9 @@ export default function Home() {
           <h3 className="text-lg font-semibold mb-2 opacity-90">
             GitHub Examples
           </h3>
-          <p className="text-sm opacity-70">View example repos</p>
+          <p className="text-sm opacity-70">
+            View our example repos on GitHub.
+          </p>
         </a>
 
         <a
@@ -99,7 +101,9 @@ export default function Home() {
           <h3 className="text-lg font-semibold mb-2 opacity-90">
             YouTube Channel
           </h3>
-          <p className="text-sm opacity-70">Watch video tutorials</p>
+          <p className="text-sm opacity-70">
+            Watch our video tutorials on YouTube.
+          </p>
         </a>
       </div>
     </div>
