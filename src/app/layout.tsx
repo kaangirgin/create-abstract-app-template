@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import NextAbstractWalletProvider from "../components/NextAbstractWalletProvider";
 
 // Default Fonts from Next.js
 const geistSans = localFont({
@@ -44,11 +45,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${avenueMono.variable} ${roobert.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <NextAbstractWalletProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} ${avenueMono.variable} ${roobert.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </NextAbstractWalletProvider>
     </html>
   );
 }
