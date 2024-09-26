@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/jarrodwatts/create-abstract-app/7ee60ab4c1cf939f17cf912107a3cb416a82ad99/public/abs-green.svg" alt="Abstract Logo" width="64" />
+    <img src="https://raw.githubusercontent.com/jarrodwatts/create-abstract-app/1b526bf4db9036edcc3df000e2af7a7cd7c5a77d/public/abs-green.svg" alt="Abstract Logo" width="64" />
     <br />
     <p>This is an <a href="https://abs.xyz" target="_blank" rel="noopener noreferrer">Abstract</a> app template bootstrapped with <a href="https://docs.abs.xyz" target="_blank" rel="noopener noreferrer">create-abstract-app</a>.</p>
 </div>
