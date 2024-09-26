@@ -1,14 +1,32 @@
 "use client";
 
+import Image from "next/image";
 import {
   useLoginWithAbstract,
   useGlobalWalletSignerAccount,
+  useGlobalWalletSignerClient,
 } from "@abstract-foundation/agw-react";
-import Image from "next/image";
 
 export default function Home() {
   const { login, logout } = useLoginWithAbstract();
   const { address, status } = useGlobalWalletSignerAccount();
+  const { data: client } = useGlobalWalletSignerClient();
+
+  // Example function of using the connected wallet to submit a transaction:
+  async function submitTransaction() {
+    if (!client) return;
+
+    try {
+      const hash = await client.sendTransaction({
+        to: "0x273B3527BF5b607dE86F504fED49e1582dD2a1C6",
+        data: "0x69",
+      });
+
+      console.log("Transaction submitted:", hash);
+    } catch (error) {
+      console.error("Transaction failed:", error);
+    }
+  }
 
   return (
     <div className="relative grid grid-rows-[1fr_auto] min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-avenue-mono)] bg-black overflow-hidden">
@@ -46,26 +64,54 @@ export default function Home() {
                     </p>
                     <p className="text-xs text-gray-400 font-mono">{address}</p>
                   </div>
-                  <button
-                    className="rounded-full border border-solid border-white/20 transition-colors flex items-center justify-center bg-white/10 text-white gap-2 hover:bg-white/20 text-sm h-10 px-5 font-[family-name:var(--font-roobert)] w-full"
-                    onClick={logout}
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
+                  <div className="flex gap-2 w-full">
+                    <button
+                      className="rounded-full border border-solid border-white/20 transition-colors flex items-center justify-center bg-white/10 text-white gap-2 hover:bg-white/20 text-sm h-10 px-5 font-[family-name:var(--font-roobert)] flex-1"
+                      onClick={logout}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                      />
-                    </svg>
-                    Disconnect
-                  </button>
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
+                      Disconnect
+                    </button>
+                    <button
+                      className={`rounded-full border border-solid transition-colors flex items-center justify-center text-white gap-2 text-sm h-10 px-5 font-[family-name:var(--font-roobert)] flex-1 w-[140px]
+                        ${
+                          !client
+                            ? "bg-gray-500 cursor-not-allowed opacity-50"
+                            : "bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 border-transparent"
+                        }`}
+                      onClick={submitTransaction}
+                      disabled={!client}
+                    >
+                      <svg
+                        className="w-4 h-4 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                      <span className="w-full text-center">Submit tx</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             ) : status === "reconnecting" || status === "connecting" ? (
