@@ -1,32 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import {
-  useLoginWithAbstract,
-  useGlobalWalletSignerAccount,
-  useGlobalWalletSignerClient,
-} from "@abstract-foundation/agw-react";
+import { useLoginWithAbstract } from "@abstract-foundation/agw-react";
+import { useAccount, useSendTransaction } from "wagmi";
 
 export default function Home() {
   const { login, logout } = useLoginWithAbstract();
-  const { address, status } = useGlobalWalletSignerAccount();
-  const { data: client } = useGlobalWalletSignerClient();
-
-  // Example function of using the connected wallet to submit a transaction:
-  async function submitTransaction() {
-    if (!client) return;
-
-    try {
-      const hash = await client.sendTransaction({
-        to: "0x273B3527BF5b607dE86F504fED49e1582dD2a1C6",
-        data: "0x69",
-      });
-
-      console.log("Transaction submitted:", hash);
-    } catch (error) {
-      console.error("Transaction failed:", error);
-    }
-  }
+  const { address, status } = useAccount();
+  const { sendTransaction, isPending } = useSendTransaction();
 
   return (
     <div className="relative grid grid-rows-[1fr_auto] min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-avenue-mono)] bg-black overflow-hidden">
@@ -88,12 +69,17 @@ export default function Home() {
                     <button
                       className={`rounded-full border border-solid transition-colors flex items-center justify-center text-white gap-2 text-sm h-10 px-5 font-[family-name:var(--font-roobert)] flex-1 w-[140px]
                         ${
-                          !client
+                          !sendTransaction || isPending
                             ? "bg-gray-500 cursor-not-allowed opacity-50"
                             : "bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 border-transparent"
                         }`}
-                      onClick={submitTransaction}
-                      disabled={!client}
+                      onClick={() =>
+                        sendTransaction({
+                          to: "0x273B3527BF5b607dE86F504fED49e1582dD2a1C6",
+                          data: "0x69",
+                        })
+                      }
+                      disabled={!sendTransaction || isPending}
                     >
                       <svg
                         className="w-4 h-4 flex-shrink-0"
