@@ -85,10 +85,9 @@ export default function Home() {
                     </button>
                     <button
                       className={`rounded-full border border-solid transition-colors flex items-center justify-center text-white gap-2 text-sm h-10 px-5 font-[family-name:var(--font-roobert)] w-full sm:flex-1
-                        ${
-                          !sendTransaction || isPending
-                            ? "bg-gray-500 cursor-not-allowed opacity-50"
-                            : "bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 border-transparent"
+                        ${!sendTransaction || isPending || transactionReceipt?.status === 'success'
+                          ? "bg-gray-500 cursor-not-allowed opacity-50"
+                          : "bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 border-transparent"
                         }`}
                       onClick={() =>
                         writeContractSponsored({
@@ -105,7 +104,7 @@ export default function Home() {
                           }),
                         })
                       }
-                      disabled={!writeContractSponsored || isPending}
+                      disabled={!writeContractSponsored || isPending || transactionReceipt?.status === 'success'}
                     >
                       <svg
                         className="w-4 h-4 flex-shrink-0"
@@ -121,7 +120,13 @@ export default function Home() {
                           d="M13 10V3L4 14h7v7l9-11h-7z"
                         />
                       </svg>
-                      <span className="w-full text-center">Submit tx</span>
+                      <span className="w-full text-center">
+                        {!transactionReceipt
+                          ? 'Submit tx'
+                          : transactionReceipt.status === 'success'
+                            ? 'Success'
+                            : 'Failed'}
+                      </span>
                     </button>
                   </div>
                   {!!transactionReceipt && (
