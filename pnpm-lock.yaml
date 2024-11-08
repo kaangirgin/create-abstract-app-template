@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@abstract-foundation/agw-client':
-        specifier: ^0.0.1-beta.13
-        version: 0.0.1-beta.13(abitype@1.0.6(typescript@5.6.3)(zod@3.23.8))(typescript@5.6.3)(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))
+        specifier: ^0.0.1-beta.15
+        version: 0.0.1-beta.15(abitype@1.0.6(typescript@5.6.3)(zod@3.23.8))(typescript@5.6.3)(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))
       '@abstract-foundation/agw-react':
-        specifier: ^0.0.1-beta.12
-        version: 0.0.1-beta.12(t3n4irrsgkgwkctpcjutq45df4)
+        specifier: ^0.0.1-beta.14
+        version: 0.0.1-beta.14(g3gxqfsvogy63inbicchabyjca)
       next:
         specifier: 14.2.13
         version: 14.2.13(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -57,8 +57,8 @@ importers:
 
 packages:
 
-  '@abstract-foundation/agw-client@0.0.1-beta.13':
-    resolution: {integrity: sha512-cxOsqzkForKEhXTGsCK6j3v/ei6FcTgPC83WiHZ15JQX++n/sX/killQv2RBqQF5KQLI2rNgXCGp7YyIpxBBUQ==}
+  '@abstract-foundation/agw-client@0.0.1-beta.15':
+    resolution: {integrity: sha512-m6B3QwomwzQS38E7J3PnV39xTZ+xa+B8B0sFFR5cq6C/gtdl9xde8UkOpaeaLm+rh+9MVdkId6+VzveJGYsFxg==}
     peerDependencies:
       abitype: ^1.0.0
       typescript: '>=5.0.4'
@@ -67,10 +67,10 @@ packages:
       typescript:
         optional: true
 
-  '@abstract-foundation/agw-react@0.0.1-beta.12':
-    resolution: {integrity: sha512-2LSMX+QI5RnW/s/0jSPGR7sdKpt0FGjCDJd/sHErC6Kd3XVT9bk5uYHGizhQnRRxRvGsSsRkTxrfAMKVUXT38g==}
+  '@abstract-foundation/agw-react@0.0.1-beta.14':
+    resolution: {integrity: sha512-l1BmXhxoTTrA8Xbu7He1NZwboOHdj4Inoes9rahOqeEOYlYf8PHfMTP5ayNUgFhhsvIqFwyXpCoS6ooNVyIPRw==}
     peerDependencies:
-      '@abstract-foundation/agw-client': 0.0.1-beta.13
+      '@abstract-foundation/agw-client': 0.0.1-beta.15
       '@privy-io/cross-app-connect': ^0.0.6
       '@privy-io/react-auth': ^1.92.2
       '@tanstack/react-query': ^5
@@ -5219,16 +5219,16 @@ packages:
 
 snapshots:
 
-  '@abstract-foundation/agw-client@0.0.1-beta.13(abitype@1.0.6(typescript@5.6.3)(zod@3.23.8))(typescript@5.6.3)(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))':
+  '@abstract-foundation/agw-client@0.0.1-beta.15(abitype@1.0.6(typescript@5.6.3)(zod@3.23.8))(typescript@5.6.3)(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))':
     dependencies:
       abitype: 1.0.6(typescript@5.6.3)(zod@3.23.8)
       viem: 2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)
     optionalDependencies:
       typescript: 5.6.3
 
-  '@abstract-foundation/agw-react@0.0.1-beta.12(t3n4irrsgkgwkctpcjutq45df4)':
+  '@abstract-foundation/agw-react@0.0.1-beta.14(g3gxqfsvogy63inbicchabyjca)':
     dependencies:
-      '@abstract-foundation/agw-client': 0.0.1-beta.13(abitype@1.0.6(typescript@5.6.3)(zod@3.23.8))(typescript@5.6.3)(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))
+      '@abstract-foundation/agw-client': 0.0.1-beta.15(abitype@1.0.6(typescript@5.6.3)(zod@3.23.8))(typescript@5.6.3)(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))
       '@privy-io/cross-app-connect': 0.0.6(@wagmi/core@2.14.1(@tanstack/query-core@5.59.16)(@types/react@18.3.12)(react@18.3.1)(typescript@5.6.3)(use-sync-external-store@1.2.0(react@18.3.1))(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)))(viem@2.21.35(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))
       '@privy-io/react-auth': 1.92.2(@solana/web3.js@1.95.4(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(@types/react@18.3.12)(bs58@5.0.0)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)
       '@tanstack/react-query': 5.59.16(react@18.3.1)
