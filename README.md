@@ -13,7 +13,7 @@ This project is a [Next.js](https://nextjs.org/) app that uses the Abstract Glob
 Create a new repository using the `create-abstract-app` CLI:
 
 ```bash
-npx create-abstract-app my-app
+npx @abstract-foundation/create-abstract-app@latest my-app
 ```
 
 Change into the project directory:
