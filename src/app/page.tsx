@@ -22,7 +22,13 @@ export default function Home() {
   <div className="col-span-9 flex items-center justify-center">
   <div className="App">
       <h1>Puzzle Game</h1>
-      <Puzzle imageUrl="/puzzle-image.jpg" gridSize={3} />
+      {status === "connected" ? (
+        <Puzzle imageUrl="/puzzle-image.jpg" gridSize={3} />
+      ):(
+        <p className="text-sm sm:text-base font-medium font-[family-name:var(--font-roobert)] mb-1">
+                      Connected to Abstract Global Wallet to Mumble Play Puzzle
+                    </p>
+      )}
     </div>
   </div>
   
