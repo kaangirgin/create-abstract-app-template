@@ -5,7 +5,7 @@ import { useLoginWithAbstract, useWriteContractSponsored } from "@abstract-found
 import { useAccount, useSendTransaction, useWaitForTransactionReceipt } from "wagmi";
 import { getGeneralPaymasterInput } from "viem/zksync";
 import { parseAbi } from "viem";
-import PuzzleGame from './Puzzle';
+import Puzzle from './Puzzle';
 
 export default function Home() {
   const { login, logout } = useLoginWithAbstract();
@@ -23,7 +23,7 @@ export default function Home() {
   <div className="App">
       <h1>Puzzle Game</h1>
       {status === "connected" ? (
-        <PuzzleGame />
+        <Puzzle />
       ):(
         <p className="text-sm sm:text-base font-medium font-[family-name:var(--font-roobert)] mb-1">
                       Connected to Abstract Global Wallet to Mumble Play Puzzle
