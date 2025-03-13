@@ -5,7 +5,7 @@ import { useLoginWithAbstract, useWriteContractSponsored } from "@abstract-found
 import { useAccount, useSendTransaction, useWaitForTransactionReceipt } from "wagmi";
 import { getGeneralPaymasterInput } from "viem/zksync";
 import { parseAbi } from "viem";
-import Puzzle from './Puzzle';
+import PuzzleGame from './Puzzle';
 
 export default function Home() {
   const { login, logout } = useLoginWithAbstract();
