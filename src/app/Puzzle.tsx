@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './globals.css'; // Stil dosyası
 
-const PUZZLE_SIZE = 3; // 3x3 puzzle
+const PUZZLE_SIZE = 9; // 3x3 puzzle
 const PIECE_SIZE = 100; // Her bir parçanın boyutu (px)
 
 const PuzzleGame: React.FC = () => {
