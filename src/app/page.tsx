@@ -5,6 +5,7 @@ import { useLoginWithAbstract, useWriteContractSponsored } from "@abstract-found
 import { useAccount, useSendTransaction, useWaitForTransactionReceipt } from "wagmi";
 import { getGeneralPaymasterInput } from "viem/zksync";
 import { parseAbi } from "viem";
+import Puzzle from './Puzzle';
 
 export default function Home() {
   const { login, logout } = useLoginWithAbstract();
@@ -19,7 +20,10 @@ export default function Home() {
 <div className="grid grid-cols-12 min-h-screen">
   {/* Left column (3/12 width) - with "test" text */}
   <div className="col-span-9 flex items-center justify-center">
-    <span className="text-lg font-medium">test</span>
+  <div className="App">
+      <h1>Puzzle Game</h1>
+      <Puzzle imageUrl="/puzzle-image.jpg" gridSize={3} />
+    </div>
   </div>
   
   {/* Right column (9/12 width) - your content */}
