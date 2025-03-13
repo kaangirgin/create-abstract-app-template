@@ -18,12 +18,12 @@ export default function Home() {
   return (
 <div className="grid grid-cols-12 min-h-screen">
   {/* Left column (3/12 width) - with "test" text */}
-  <div className="col-span-3 flex items-center justify-center">
+  <div className="col-span-9 flex items-center justify-center">
     <span className="text-lg font-medium">test</span>
   </div>
   
   {/* Right column (9/12 width) - your content */}
-  <div className="col-span-9">
+  <div className="col-span-3">
     <div className="relative grid grid-rows-[1fr_auto] min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-avenue-mono)] bg-black overflow-hidden">
       {/* Grids and aurora gradients */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f0f0f_1px,transparent_1px),linear-gradient(to_bottom,#0f0f0f_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
