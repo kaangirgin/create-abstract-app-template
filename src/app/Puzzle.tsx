@@ -1,156 +1,78 @@
 import React, { useState, useEffect } from 'react';
+import './PuzzleGame.css'; // Stil dosyası
 
-interface PuzzlePiece {
-  id: number;
-  correctPosition: number;
-  currentPosition: number;
-  image: string;
-}
+const PUZZLE_SIZE = 3; // 3x3 puzzle
+const PIECE_SIZE = 100; // Her bir parçanın boyutu (px)
 
-interface PuzzleProps {
-  imageUrl: string;
-  gridSize: number; // Örneğin: 3 için 3x3 puzzle
-}
+const PuzzleGame: React.FC = () => {
+  const [puzzlePieces, setPuzzlePieces] = useState<number[]>([]);
+  const [shuffledPieces, setShuffledPieces] = useState<number[]>([]);
+  const [selectedPiece, setSelectedPiece] = useState<number | null>(null);
 
-const Puzzle: React.FC<PuzzleProps> = ({ imageUrl, gridSize = 3 }) => {
-  const [pieces, setPieces] = useState<PuzzlePiece[]>([]);
-  const [isComplete, setIsComplete] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  // Puzzle parçalarını başlangıçta hazırla
   useEffect(() => {
-    const initializePuzzle = async () => {
-      setIsLoading(true);
-      
-      // Puzzle parçalarını oluştur
-      const totalPieces = gridSize * gridSize;
-      const initialPieces: PuzzlePiece[] = [];
-      
-      for (let i = 0; i < totalPieces; i++) {
-        initialPieces.push({
-          id: i,
-          correctPosition: i,
-          currentPosition: i,
-          image: `${imageUrl}#piece-${i}`
-        });
-      }
-      
-      // Parçaları karıştır (son parça hariç)
-      const shuffledPieces = [...initialPieces];
-      for (let i = 0; i < shuffledPieces.length - 2; i++) {
-        const j = Math.floor(Math.random() * (shuffledPieces.length - 1));
-        [shuffledPieces[i].currentPosition, shuffledPieces[j].currentPosition] = 
-        [shuffledPieces[j].currentPosition, shuffledPieces[i].currentPosition];
-      }
-      
-      setPieces(shuffledPieces);
-      setIsLoading(false);
-    };
-    
     initializePuzzle();
-  }, [imageUrl, gridSize]);
+  }, []);
 
-  // Puzzle'ın tamamlandığını kontrol et
-  useEffect(() => {
-    if (pieces.length === 0) return;
-    
-    const allCorrect = pieces.every(piece => piece.currentPosition === piece.correctPosition);
-    setIsComplete(allCorrect);
-    
-    if (allCorrect) {
-      console.log("Tebrikler! Puzzle'ı tamamladınız!");
+  const initializePuzzle = () => {
+    const pieces = Array.from({ length: PUZZLE_SIZE * PUZZLE_SIZE }, (_, i) => i);
+    setPuzzlePieces(pieces);
+    setShuffledPieces(shuffleArray([...pieces]));
+  };
+
+  const shuffleArray = (array: number[]): number[] => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-  }, [pieces]);
+    return array;
+  };
 
-  // Parça taşıma mantığı
-  const movePiece = (pieceId: number) => {
-    const pieceIndex = pieces.findIndex(p => p.id === pieceId);
-    if (pieceIndex === -1) return;
-    
-    const piece = pieces[pieceIndex];
-    const emptyIndex = pieces.findIndex(p => p.currentPosition === gridSize * gridSize - 1);
-    if (emptyIndex === -1) return;
-    
-    const emptyPiece = pieces[emptyIndex];
-    
-    // Parçanın boş alanın yanında olup olmadığını kontrol et
-    const piecePosition = piece.currentPosition;
-    const emptyPosition = emptyPiece.currentPosition;
-    
-    const pieceRow = Math.floor(piecePosition / gridSize);
-    const pieceCol = piecePosition % gridSize;
-    const emptyRow = Math.floor(emptyPosition / gridSize);
-    const emptyCol = emptyPosition % gridSize;
-    
-    // Parça sadece boş alanın yanındaysa taşınabilir
-    const isAdjacent = (
-      (pieceRow === emptyRow && Math.abs(pieceCol - emptyCol) === 1) ||
-      (pieceCol === emptyCol && Math.abs(pieceRow - emptyRow) === 1)
-    );
-    
-    if (isAdjacent) {
-      // Parçaları taşı
-      const newPieces = [...pieces];
-      [newPieces[pieceIndex].currentPosition, newPieces[emptyIndex].currentPosition] = 
-      [newPieces[emptyIndex].currentPosition, newPieces[pieceIndex].currentPosition];
-      
-      setPieces(newPieces);
+  const handlePieceClick = (index: number) => {
+    if (selectedPiece === null) {
+      setSelectedPiece(index);
+    } else {
+      const newPieces = [...shuffledPieces];
+      [newPieces[selectedPiece], newPieces[index]] = [newPieces[index], newPieces[selectedPiece]];
+      setShuffledPieces(newPieces);
+      setSelectedPiece(null);
+
+      if (isPuzzleSolved(newPieces)) {
+        alert('Tebrikler! Puzzle\'ı çözdünüz!');
+      }
     }
   };
 
-  // Puzzle'ı sıfırla
-  const resetPuzzle = () => {
-    const shuffledPieces = [...pieces];
-    for (let i = 0; i < shuffledPieces.length - 2; i++) {
-      const j = Math.floor(Math.random() * (shuffledPieces.length - 1));
-      [shuffledPieces[i].currentPosition, shuffledPieces[j].currentPosition] = 
-      [shuffledPieces[j].currentPosition, shuffledPieces[i].currentPosition];
-    }
-    
-    setPieces(shuffledPieces);
-    setIsComplete(false);
+  const isPuzzleSolved = (pieces: number[]): boolean => {
+    return pieces.every((piece, index) => piece === index);
   };
-
-  if (isLoading) {
-    return <div>Puzzle yükleniyor...</div>;
-  }
 
   return (
-    <div className="puzzle-container">
-      <div 
-        className="puzzle-grid" 
-        style={{ 
-          display: 'grid', 
-          gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-          gap: '2px',
-          width: '300px',
-          height: '300px'
+    <div className="puzzle-game">
+      <h1>Puzzle Oyunu</h1>
+      <div
+        className="puzzle-board"
+        style={{
+          width: `${PUZZLE_SIZE * PIECE_SIZE}px`,
+          height: `${PUZZLE_SIZE * PIECE_SIZE}px`,
         }}
       >
-        {pieces.map(piece => (
+        {shuffledPieces.map((piece, index) => (
           <div
-            key={piece.id}
-            className="puzzle-piece"
+            key={piece}
+            className={`puzzle-piece ${selectedPiece === index ? 'selected' : ''}`}
             style={{
-              backgroundImage: piece.id === gridSize * gridSize - 1 && !isComplete ? 'none' : `url(${piece.image})`,
-              backgroundSize: `${gridSize * 100}% ${gridSize * 100}%`,
-              backgroundPosition: `${(piece.correctPosition % gridSize) * 100 / (gridSize - 1)}% ${Math.floor(piece.correctPosition / gridSize) * 100 / (gridSize - 1)}%`,
-              cursor: isComplete ? 'default' : 'pointer',
-              width: '100%',
-              height: '100%',
-              border: '1px solid #ccc'
+              width: `${PIECE_SIZE}px`,
+              height: `${PIECE_SIZE}px`,
+              backgroundImage: `url(/puzzle-image.jpg)`,
+              backgroundPosition: `-${(piece % PUZZLE_SIZE) * PIECE_SIZE}px -${Math.floor(piece / PUZZLE_SIZE) * PIECE_SIZE}px`,
             }}
-            onClick={() => !isComplete && movePiece(piece.id)}
+            onClick={() => handlePieceClick(index)}
           />
         ))}
       </div>
-      
-      <div className="puzzle-controls" style={{ marginTop: '1rem' }}>
-        <button onClick={resetPuzzle}>Tekrar Karıştır</button>
-        {isComplete && <div className="puzzle-complete-message">Tebrikler! Puzzle tamamlandı!</div>}
-      </div>
+      <button onClick={initializePuzzle}>Yeniden Başlat</button>
     </div>
   );
 };
 
-export default Puzzle;
+export default PuzzleGame;

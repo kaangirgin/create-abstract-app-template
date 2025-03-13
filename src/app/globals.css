@@ -18,3 +18,31 @@ body {
     text-wrap: balance;
   }
 }
+
+.puzzle-game {
+  text-align: center;
+}
+
+.puzzle-board {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  border: 2px solid #000;
+}
+
+.puzzle-piece {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.puzzle-piece.selected {
+  border: 2px solid #f00;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
