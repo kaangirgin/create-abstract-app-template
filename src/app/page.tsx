@@ -17,8 +17,10 @@ export default function Home() {
 
   return (
 <div className="grid grid-cols-12 min-h-screen">
-  {/* Left column (3/12 width) - empty */}
-  <div className="col-span-3"></div>
+  {/* Left column (3/12 width) - with "test" text */}
+  <div className="col-span-3 flex items-center justify-center">
+    <span className="text-lg font-medium">test</span>
+  </div>
   
   {/* Right column (9/12 width) - your content */}
   <div className="col-span-9">
